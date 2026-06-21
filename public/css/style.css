@@ -1,0 +1,260 @@
+
+.fa-compass{
+    color:#fe424d;
+    font-size: 2rem;
+}
+
+.nav-link{
+    color: #222222 !important;
+}
+
+footer {
+    background: #f8f9fa;
+    border-top: 1px solid #ddd;
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
+
+.f-info {
+    height: 6rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+    text-align: center;
+}
+
+.f-info-socials,
+.f-info-links,
+.f-info-brand {
+    width: 100%;
+}
+
+.f-info-socials i {
+    font-size: 1.3rem;
+    margin-right: 1rem;
+}
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222;
+    margin: 0 0.5rem;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+/* Listing Cards */
+
+.listing-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.listing-card {
+    border: none !important;
+    border-radius: 1rem !important;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.listing-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+    height: 250px;
+    object-fit: cover;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #222;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.card-text span {
+    color: #ff385c;
+    font-weight: 700;
+}
+
+/* Heading */
+
+h3 {
+    text-align: center;
+    margin: 2rem 0;
+    font-weight: 700;
+    color: #222;
+}
+
+/* Container spacing */
+
+.row {
+    margin-top: 2rem;
+}
+
+/* Create Listing Form */
+
+.listing-form {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.listing-form .form-control {
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+}
+
+.listing-form .form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 56, 92, 0.25);
+    border-color: #ff385c;
+}
+
+.btn-danger {
+    background-color: #ff385c !important;
+    border-color: #ff385c !important;
+    border-radius: 0.75rem !important;
+    padding: 0.75rem !important;
+    font-weight: 600;
+}
+
+.btn-danger:hover {
+    background-color: #e31c5f !important;
+    border-color: #e31c5f !important;
+}
+
+/* Create & Edit Forms */
+
+.listing-form {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.listing-form .form-control {
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+}
+
+.listing-form .form-control:focus {
+    border-color: #ff385c;
+    box-shadow: 0 0 0 0.2rem rgba(255, 56, 92, 0.2);
+}
+
+/* Edit Button */
+
+.btn-warning {
+    border-radius: 0.75rem !important;
+    padding: 0.75rem !important;
+    font-weight: 600;
+}
+
+/* Form Heading */
+
+h3 {
+    font-weight: 700;
+    color: #222;
+}
+
+/* Show Page */
+
+.listing-show-card {
+    border: none !important;
+    border-radius: 1rem !important;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.show-img {
+    height: 450px;
+    object-fit: cover;
+}
+
+.listing-show-card .card-body {
+    padding: 2rem;
+}
+
+.listing-show-card .card-title {
+    font-weight: 700;
+}
+
+.listing-show-card p {
+    font-size: 1.05rem;
+    margin-bottom: 0.8rem;
+}
+
+.btn-warning,
+.btn-danger {
+    min-width: 100px;
+    border-radius: 0.75rem !important;
+    font-weight: 600;
+}
+
+.review-card{
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+
+.review-card .card-title{
+    color: #f39c12;
+    font-weight: 600;
+}
+
+.review-card .card-text{
+    color: #555;
+    line-height: 1.6;
+}
+
+h4{
+    margin-bottom: 1rem;
+}
+
+.review-card{
+    border:none;
+    border-radius:16px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+    transition:all .3s ease;
+}
+
+.review-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+.review-card .card-title{
+    font-weight:600;
+    margin-bottom:0.5rem;
+}
+
+.starability-result{
+    margin-bottom:0.8rem;
+}
+
+.review-card p{
+    color:#555;
+}
+
+.edit-preview-img{
+    width: 100%;
+    max-width: 350px;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    margin-top: 0.5rem;
+    border-radius: 12px;
+}

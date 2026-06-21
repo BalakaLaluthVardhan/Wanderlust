@@ -1,0 +1,19 @@
+<% layout("./layouts/boilerplate.ejs") %>
+
+<div class="container mt-5">
+    <div class="alert alert-danger shadow">
+        <h2 class="alert-heading">
+            Error <%= statusCode %>
+        </h2>
+
+        <hr>
+
+        <p class="mb-0">
+            <%= message %>
+        </p>
+    </div>
+
+    <a href="/listings" class="btn btn-primary mt-3">
+        Back to Listings
+    </a>
+</div>
