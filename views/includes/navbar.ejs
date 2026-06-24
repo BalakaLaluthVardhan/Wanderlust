@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md bg-body-tertiary border-bottom sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
-      <i class="fa-regular fa-compass"></i>
+      <i class="fa-solid fa-compass" style="color: #ff385c; font-size: 2rem;"></i>
     </a>
 
     <button
@@ -28,8 +28,16 @@
         <% } %>
       </ul>
 
+      <!-- Search Bar -->
+      <div class="navbar-nav mx-auto py-2 py-md-0">
+        <form class="d-flex" role="search" action="/listings" method="GET">
+          <input class="form-control search-input" type="search" placeholder="Search destinations" name="search" style="border-radius: 25px 0 0 25px; border: 1px solid #ced4da; border-right: none; padding-left: 1.2rem; width: 250px;" value="<%= typeof search !== 'undefined' ? search : '' %>">
+          <button class="btn btn-search" type="submit" style="background-color: #ff385c; color: white; border-radius: 0 25px 25px 0; border: 1px solid #ced4da; border-left: none; padding-right: 1.2rem;"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+      </div>
+
       <!-- Right Side -->
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto align-items-center">
 
         <% if(!currUser) { %>
           <li class="nav-item">
@@ -41,15 +49,22 @@
           </li>
 
         <% } else { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/wishlist"><i class="fa-regular fa-heart"></i> Wishlist</a>
+          </li>
 
           <li class="nav-item">
-            <span class="nav-link">
-              Welcome, <%= currUser.username %>
+            <a class="nav-link" href="/dashboard"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+          </li>
+
+          <li class="nav-item ms-md-3">
+            <span class="nav-link fw-semibold">
+              Hi, <%= currUser.username %>
             </span>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
+            <a class="nav-link text-danger" href="/logout">Logout</a>
           </li>
 
         <% } %>

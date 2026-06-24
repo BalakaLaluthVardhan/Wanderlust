@@ -17,6 +17,7 @@ const User = require("./models/user.js");
 const listingsRoute = require("./routes/listing.js");
 const reviewsRoute  = require("./routes/reviews.js");
 const userRoute = require("./routes/user.js");
+const bookingsRoute = require("./routes/booking.js");
 
 main()
     .then(()=>{
@@ -67,6 +68,11 @@ app.use((req,res,next)=>{
 app.use("/listings",listingsRoute);
 app.use("/listings/:id/reviews", reviewsRoute);
 app.use("/",userRoute);
+app.use("/", bookingsRoute);
+
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
 
 
 // 404

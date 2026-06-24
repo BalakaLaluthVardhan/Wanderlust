@@ -34,9 +34,26 @@ const listingSchema = new Schema({
         type:Schema.Types.ObjectId,
         ref:"User",
     },
+    category: {
+        type: String,
+        enum: ["Trending", "Rooms", "Iconic Cities", "Mountains", "Castles", "Amazing Pools", "Camping", "Farms", "Arctic"],
+        required: true,
+        default: "Trending"
+    },
+    geometry: {
+        type: {
+            type: String,
+            enum: ["Point"],
+            required: true,
+            default: "Point"
+        },
+        coordinates: {
+            type: [Number],
+            required: true,
+            default: [77.209, 28.613] // Default to New Delhi coordinates [lon, lat]
+        }
+    }
 });
-
-const Listing = mongoose.model("Listing",listingSchema);
 
 listingSchema.post("findOneAndDelete", async (listing) => {
     if (listing) {
@@ -45,5 +62,7 @@ listingSchema.post("findOneAndDelete", async (listing) => {
         });
     }
 });
+
+const Listing = mongoose.model("Listing",listingSchema);
 
 module.exports = Listing;

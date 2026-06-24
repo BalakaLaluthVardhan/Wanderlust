@@ -1,0 +1,41 @@
+<% layout("./layouts/boilerplate.ejs") %>
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-center"><i class="fa-solid fa-heart text-danger"></i> My Wishlist</h2>
+
+    <div class="row">
+        <% if(wishlist && wishlist.length > 0) { %>
+            <% for(let list of wishlist){ %>
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="position-relative">
+                        <!-- Remove Wishlist Button -->
+                        <form method="POST" action="/listings/<%= list.id %>/wishlist" class="wishlist-heart-form" style="position: absolute; top: 15px; right: 15px; z-index: 10;">
+                            <button type="submit" class="btn btn-link p-0 text-decoration-none border-0" style="background: none;">
+                                <i class="fa-solid fa-heart fs-4" style="color: #ff385c; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.5));"></i>
+                            </button>
+                        </form>
+
+                        <a href="/listings/<%= list.id %>" class="listing-link">
+                            <div class="card listing-card h-100">
+                                <img src="<%= list.image.url %>" class="card-img-top" alt="listing-image" style="height: 250px; object-fit: cover;">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <strong><%= list.title %></strong><br>
+                                        &#8377; <%= list.price.toLocaleString("en-IN") %> / night
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            <% } %>
+        <% } else { %>
+            <div class="col-12 text-center py-5">
+                <i class="fa-regular fa-heart fs-1 text-muted mb-3"></i>
+                <h5>Your wishlist is empty.</h5>
+                <p class="text-muted">Tap the heart icon on listings to save them here.</p>
+                <a href="/listings" class="btn btn-danger btn-sm">Explore Listings</a>
+            </div>
+        <% } %>
+    </div>
+</div>

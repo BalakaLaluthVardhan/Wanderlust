@@ -1,28 +1,94 @@
 <% layout("./layouts/boilerplate.ejs") %>
 <body>
-    <h3>All Listings</h3>
-    <!-- <form method="GET" action="/listings/new">
-        <button>
-            Create New List
-        </button>
-    </form> -->
-<div class="row">
-    <% for(let list of listings){ %>
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-            <a href="/listings/<%= list.id %>" class="listing-link">
-                <div class="card listing-card">
-                    <img src="<%= list.image.url  %>" class="card-img-top" alt="listing-image">
-                    <div class="card-body">
-                        <p class="card-text">
-                            <%= list.title %><br>
-                            &#8377; <%= list.price.toLocaleString("en-IN") %>/Night
-                        </p>
-                    </div>
-                </div>
-            </a>
+    <!-- Category Filters -->
+    <div class="filters-container mb-4 mt-3">
+        <div id="filters" class="d-flex align-items-center overflow-x-auto py-2 gap-4" style="scrollbar-width: none;">
+            <% 
+            const categoriesList = [
+                { name: "Trending", icon: "fa-fire" },
+                { name: "Rooms", icon: "fa-bed" },
+                { name: "Iconic Cities", icon: "fa-mountain-city" },
+                { name: "Mountains", icon: "fa-mountain" },
+                { name: "Castles", icon: "fa-fort-awesome" },
+                { name: "Amazing Pools", icon: "fa-person-swimming" },
+                { name: "Camping", icon: "fa-tent" },
+                { name: "Farms", icon: "fa-cow" },
+                { name: "Arctic", icon: "fa-snowflake" }
+            ];
+            for(let cat of categoriesList) { 
+            %>
+                <a href="/listings?category=<%= cat.name %>" class="filter-item text-center text-decoration-none text-muted <%= category === cat.name ? 'active-filter' : '' %>" style="min-width: 80px; transition: all 0.2s;">
+                    <div><i class="fa-solid <%= cat.icon %> fs-4 mb-1"></i></div>
+                    <span class="small fw-semibold" style="font-size: 0.75rem;"><%= cat.name %></span>
+                </a>
+            <% } %>
+            
+            <% if (category || search) { %>
+                <a href="/listings" class="btn btn-sm btn-outline-secondary ms-auto text-nowrap">Clear Filter</a>
+            <% } %>
         </div>
-    <% } %>
-</div> 
+    </div>
+
+    <!-- Tax Switch Toggle -->
+    <div class="tax-toggle-container mb-4 d-flex align-items-center justify-content-between p-3 border rounded-3 bg-light">
+        <span class="fw-semibold text-dark">Display total after taxes (includes 18% GST)</span>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="tax-toggle" style="cursor: pointer; width: 2.5em; height: 1.25em;">
+        </div>
+    </div>
+
+    <div class="row">
+        <% for(let list of listings){ %>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="position-relative">
+                    <!-- Wishlist Heart Icon -->
+                    <% if (currUser) { %>
+                        <form method="POST" action="/listings/<%= list.id %>/wishlist" class="wishlist-heart-form" style="position: absolute; top: 15px; right: 15px; z-index: 10;">
+                            <button type="submit" class="btn btn-link p-0 text-decoration-none border-0" style="background: none;">
+                                <% if (currUser.wishlist && currUser.wishlist.some(wishlistId => wishlistId.toString() === list._id.toString())) { %>
+                                    <i class="fa-solid fa-heart fs-4" style="color: #ff385c; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.5));"></i>
+                                <% } else { %>
+                                    <i class="fa-regular fa-heart fs-4 text-white" style="filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.8));"></i>
+                                <% } %>
+                            </button>
+                        </form>
+                    <% } %>
+
+                    <a href="/listings/<%= list.id %>" class="listing-link">
+                        <div class="card listing-card">
+                            <img src="<%= list.image.url  %>" class="card-img-top" alt="listing-image">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <strong><%= list.title %></strong><br>
+                                    <span class="price-span base-price">&#8377; <%= list.price.toLocaleString("en-IN") %> / night</span>
+                                    <span class="price-span tax-price d-none">&#8377; <%= Math.round(list.price * 1.18).toLocaleString("en-IN") %> / night</span>
+                                    <br><span class="tax-info text-muted d-none" style="font-size: 0.8rem;">Includes 18% GST</span>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        <% } %>
+    </div> 
+
+    <script>
+        document.getElementById("tax-toggle").addEventListener("change", (e) => {
+            const basePrices = document.querySelectorAll(".base-price");
+            const taxPrices = document.querySelectorAll(".tax-price");
+            const taxToggles = document.querySelectorAll(".tax-info");
+            
+            if (e.target.checked) {
+                basePrices.forEach(el => el.classList.add("d-none"));
+                taxPrices.forEach(el => el.classList.remove("d-none"));
+                taxToggles.forEach(el => el.classList.remove("d-none"));
+            } else {
+                basePrices.forEach(el => el.classList.remove("d-none"));
+                taxPrices.forEach(el => el.classList.add("d-none"));
+                taxToggles.forEach(el => el.classList.add("d-none"));
+            }
+        });
+    </script>
 </body>
 
 

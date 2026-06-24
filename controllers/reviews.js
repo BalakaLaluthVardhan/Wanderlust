@@ -35,3 +35,25 @@ module.exports.destroyReview = async (req, res) => {
     req.flash("success", "Review Deleted");
     res.redirect(`/listings/${id}`);
 };
+
+// EDIT REVIEW FORM
+module.exports.renderEditReviewForm = async (req, res) => {
+    let { id, reviewId } = req.params;
+    let listing = await Listing.findById(id);
+    let review = await Review.findById(reviewId);
+    if (!listing || !review) {
+        throw new ExpressError(404, "Not Found");
+    }
+    res.render("reviews/edit.ejs", { listing, review });
+};
+
+// UPDATE REVIEW
+module.exports.updateReview = async (req, res) => {
+    let { id, reviewId } = req.params;
+    let review = await Review.findByIdAndUpdate(reviewId, { ...req.body.review }, { new: true, runValidators: true });
+    if (!review) {
+        throw new ExpressError(404, "Review Not Found");
+    }
+    req.flash("success", "Review Updated");
+    res.redirect(`/listings/${id}`);
+};
