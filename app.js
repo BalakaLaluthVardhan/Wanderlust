@@ -77,6 +77,17 @@ app.get("/", (req, res) => {
 });
 
 
+app.get("/debug-env", (req, res) => {
+    res.json({
+        NODE_ENV: process.env.NODE_ENV,
+        has_ATLASDB_URL: !!process.env.ATLASDB_URL,
+        has_CLOUD_NAME: !!process.env.CLOUD_NAME,
+        has_CLOUD_API_KEY: !!process.env.CLOUD_API_KEY,
+        has_CLOUD_API_SECRET: !!process.env.CLOUD_API_SECRET,
+        keys: Object.keys(process.env).filter(k => k.includes("CLOUD") || k.includes("API") || k.includes("KEY"))
+    });
+});
+
 // 404
 app.all("/*splat", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found"));
