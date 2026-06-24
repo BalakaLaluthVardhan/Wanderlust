@@ -32,7 +32,7 @@ if(listing.reviews && listing.reviews.length > 0) {
           </div>
         </div>
 
-        <p class="text-muted fs-6">Hosted by <span class="fw-semibold text-dark text-capitalize"><%= listing.owner.username %></span></p>
+        <p class="text-muted fs-6">Hosted by <span class="fw-semibold text-dark text-capitalize"><%= listing.owner ? listing.owner.username : "Wanderlust Host" %></span></p>
         <hr class="my-4">
         
         <h4 class="fw-bold mb-3">About this place</h4>
@@ -45,7 +45,7 @@ if(listing.reviews && listing.reviews.length > 0) {
           <div class="d-flex align-items-center"><i class="fa-solid fa-earth-americas text-danger me-3 fs-5" style="width: 24px; text-align: center;"></i> <span><strong>Country:</strong> <%= listing.country %></span></div>
         </div>
 
-        <% if(currUser && currUser._id.equals(listing.owner._id)) { %>
+        <% if(currUser && listing.owner && currUser._id.equals(listing.owner._id)) { %>
           <div class="d-flex gap-2 mt-4">
             <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning px-4 py-2 fw-semibold" style="border-radius: 0.75rem;">Edit Listing</a>
             <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
@@ -58,7 +58,7 @@ if(listing.reviews && listing.reviews.length > 0) {
 
     <!-- Booking Sidebar (Right Column on Desktop, stacks on mobile) -->
     <div class="col-lg-4 mb-4">
-      <% if (currUser && !currUser._id.equals(listing.owner._id)) { %>
+      <% if (currUser && (!listing.owner || !currUser._id.equals(listing.owner._id))) { %>
         <div class="card booking-sticky-card shadow border rounded-4 p-4 bg-white">
           <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
@@ -221,7 +221,7 @@ if(listing.reviews && listing.reviews.length > 0) {
 </script>
 
 <!-- Cost Estimation Script -->
-<% if (currUser && !currUser._id.equals(listing.owner._id)) { %>
+<% if (currUser && (!listing.owner || !currUser._id.equals(listing.owner._id))) { %>
   <script>
       const checkInInput = document.getElementById("check-in");
       const checkOutInput = document.getElementById("check-out");
