@@ -170,8 +170,3 @@ When deploying on containerized cloud platforms like **Render**:
 - **MongoDB Atlas Network Access:** Ensure your Atlas cluster's Network Access has `0.0.0.0/0` (Allow Access from Anywhere) enabled to accommodate Render's dynamic IP ranges.
 - **Environment Variables:** Set `NODE_ENV=production`, `ATLASDB_URL`, `CLOUD_NAME`, `CLOUD_API_KEY`, and `CLOUD_API_SECRET` in the Render Environment settings.
 
----
-
-## 📜 License
-
-This project is licensed under the [ISC License](LICENSE).
